@@ -5,7 +5,7 @@ pipeline {
         stage('Build') {
                 steps {
                     echo 'Building..'
-                    sh 'mvn clean package'
+                    sh '/home/jenkins/apache-maven-3.5.2/bin/mvn clean package'
                 }
                 post{
                     success{

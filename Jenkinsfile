@@ -11,7 +11,9 @@ pipeline {
                     success{
                         echo 'Archiving.....,'
                         archiveArtifacts artifacts: '**/target/*.war'
-                        sh 'sudo docker build -t cassandra-webapp .'
+                        #sh 'sudo docker build -t cassandra-webapp .'
+                        sh 'chmod +x build_docker.sh'
+                        sh './build_docker.sh'
                     }
                 }
         }

@@ -115,7 +115,7 @@ public class TestCassandraDB extends HttpServlet {
        out.println("</br>") ;
         while(iterator.hasNext()){
             employee = (EmployeeDAO.Employee)iterator.next();
-            
+            out.println("Employee First Nmae :: " + employee.getEmpFirst()) ;
         }
        
        

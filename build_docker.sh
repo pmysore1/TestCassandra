@@ -1,5 +1,6 @@
 #!/bin/bash
 echo "Running docker build script"
+echo "$1"
 existing = $(sudo docker ps | grep cassandra-webapp | grep -o "^[0-9a-z]*")  
 if [ ! -z "$existing" ]; then  
   sudo docker stop $existing

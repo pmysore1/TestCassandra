@@ -6,7 +6,7 @@ pipeline {
                 steps {
                     echo 'Building..'
                     sh '/home/jenkins/apache-maven-3.5.2/bin/mvn -Pdev clean package'
-                    sh '/home/jenkins/apache-maven-3.5.2/bin/mvn -Ptest clean package'
+                    sh '/home/jenkins/apache-maven-3.5.2/bin/mvn -Ptest package'
                 }
                 post{
                     success{

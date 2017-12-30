@@ -14,7 +14,56 @@
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
     </properties>
   
-
+    <!-- Profile configuration -->
+    <profiles>
+        <!-- The configuration of the development profile -->
+        <profile>
+            <id>dev</id>
+            <!-- The development profile is active by default -->
+            <activation>
+                <activeByDefault>true</activeByDefault>
+            </activation>
+            <properties>
+                <!--
+                    Specifies the build.profile.id property that must be equal than the name of
+                    the directory that contains the profile specific configuration file.
+                    Because the name of the directory that contains the configuration file of the
+                    development profile is dev, we must set the value of the build.profile.id 
+                    property to dev.
+                -->
+                <build.profile.id>dev</build.profile.id>
+            </properties>
+        </profile>
+        <!-- The configuration of the production profile -->
+        <profile>
+            <id>prod</id>
+            <properties>
+                <!--
+                    Specifies the build.profile.id property that must be equal than the name of
+                    the directory that contains the profile specific configuration file.
+                    Because the name of the directory that contains the configuration file of the
+                    production profile is prod, we must set the value of the build.profile.id 
+                    property to prod.
+                -->
+                <build.profile.id>prod</build.profile.id>
+            </properties>
+        </profile>
+        <!-- The configuration of the testing profile -->
+        <profile>
+            <id>test</id>
+            <properties>
+                <!--
+                    Specifies the build.profile.id property that must be equal than the name of
+                    the directory that contains the profile specific configuration file.
+                    Because the name of the directory that contains the configuration file of the
+                    testing profile is test, we must set the value of the build.profile.id 
+                    property to test.
+                -->
+                <build.profile.id>test</build.profile.id>
+            </properties>
+        </profile>
+    </profiles>
+    
     <dependencies>
         <dependency>
             <groupId>com.datastax.cassandra</groupId>
@@ -28,9 +77,24 @@
             <scope>provided</scope>
         </dependency>
     </dependencies>
-
+    
     <build>
-        <finalName>TestCassandra</finalName>
+        <finalName>${build.profile.id}.TestCassandra</finalName>
+        <filters>
+        <!--
+            Ensures that the config.properties file is always loaded from the
+            configuration directory of the active Maven profile. 
+        -->
+            <filter>profiles/${build.profile.id}/app.properties</filter>
+        </filters>
+         <resources>
+            <resource>
+                    <filtering>true</filtering>
+                    <!--<directory>src/main/resources</directory>-->
+                    <directory>profiles/${build.profile.id}</directory>
+            </resource>
+        </resources>
+        
         <plugins>
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
@@ -73,14 +137,7 @@
                                     <type>jar</type>
                                 </artifactItem>
                             </artifactItems>
-                              <resources>
-                                <resource>
-                                        <directory>src/main/resources</directory>
-                                        <includes>
-                                            <include>**/*</include>
-                                        </includes>
-                                </resource>
-                              </resources>
+                             
                         </configuration>
                     </execution>
                 </executions>

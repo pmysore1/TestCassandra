@@ -94,6 +94,14 @@ public class TestCassandraDB extends HttpServlet {
        List<EmployeeDAO.Employee> employeeList;
        ClassLoader classLoader = Thread.currentThread().getContextClassLoader() ;
        EmployeeDAO.Employee employee ;
+       String app_env= System.getProperty("app_env") ;
+       if(app_env != null)
+       {
+           out.println("App environment ::" +app_env) ;
+       }
+       else 
+            out.println("App environment is null ::") ;
+       out.println("</br>") ;
        
        prop.load(classLoader.getResourceAsStream("app.properties")); 
        String dbHostName = prop.getProperty("cassandraDBHostName") ;

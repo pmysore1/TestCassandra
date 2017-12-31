@@ -18,5 +18,7 @@ for docker_images in $( sudo docker images | grep cassandra-webapp | awk '{print
 done
 #sudo docker rmi -f cassandra-webapp || true
 sudo docker build -t cassandra-webapp:$1 .
-sudo docker run -d -p 8080:8080 --name cassandra-webapp cassandra-webapp:$1
+sudo docker run -d -p 8080:8080 -e JAVA_OPTS='-Ddev-yy' --name cassandra-webapp cassandra-webapp:$1
+
+-e JAVA_OPTS='-Xmx1g'
 

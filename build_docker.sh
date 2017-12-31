@@ -20,5 +20,5 @@ done
 sudo docker build -t cassandra-webapp:$1 .
 sudo docker run -d -p 8080:8080 -e JAVA_OPTS='-Ddev-yy' --name cassandra-webapp cassandra-webapp:$1
 
--e JAVA_OPTS='-Xmx1g'
+
 

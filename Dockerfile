@@ -1,4 +1,4 @@
-FROM tomcat:latest
+FROM tomcat:alpine
 WORKDIR .
 ENV CATALINA_HOME /usr/local/tomcat
 ENV profile=dev

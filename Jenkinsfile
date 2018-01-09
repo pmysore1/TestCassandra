@@ -2,7 +2,10 @@ pipeline {
     agent {label 'jenkins-slave-docker'}
     stages
     {
-        stage('Build') {
+            stage('Checkout SCM') {
+                git branch: 'hotfix', url: "https://github.com/pmysore1/TestCassandra.git"
+            }
+            stage('Build') {
                 steps {
                     echo 'Building..'
                     sh '/home/jenkins/apache-maven-3.5.2/bin/mvn -Pdev clean package'

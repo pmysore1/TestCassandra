@@ -97,7 +97,7 @@ public class TestCassandraDB extends HttpServlet {
        String app_env= System.getProperty("app_env") ;
        if(app_env != null)
        {
-           out.println("App environment ::" +app_env) ;
+           out.println("App environment (from test brach) ::" +app_env) ;
        }
        else 
             out.println("App environment is null ::") ;

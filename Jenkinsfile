@@ -3,7 +3,7 @@ pipeline {
     stages
     {
             stage('Checkout SCM') {
-                git branch: 'hotfix', url: "https://github.com/pmysore1/TestCassandra.git"
+                checkout([$class: 'GitSCM', branches: [[name: '*/hotfix']], doGenerateSubmoduleConfigurations: false, extensions: [], submoduleCfg: [], userRemoteConfigs: [[url: 'https://github.com/pmysore1/TestCassandra.git']]])
             }
             stage('Build') {
                 steps {

@@ -83,6 +83,11 @@
             <scope>test</scope>
         </dependency>
         <dependency>
+            <groupId>checkstyle</groupId>
+            <artifactId>checkstyle</artifactId>
+            <version>5.0</version>
+        </dependency>
+        <dependency>
             <groupId>javax</groupId>
             <artifactId>javaee-web-api</artifactId>
             <version>7.0</version>
@@ -107,7 +112,7 @@
                     <directory>profiles/${build.profile.id}</directory>
             </resource>
         </resources>
-        
+       
         <plugins>
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
@@ -156,6 +161,23 @@
                 </executions>
             </plugin>
         </plugins>
+        
     </build>
+    <reporting>
+           <plugins>
+             <plugin>
+               <groupId>org.apache.maven.plugins</groupId>
+               <artifactId>maven-checkstyle-plugin</artifactId>
+               <version>5.0</version>
+               <reportSets>
+                 <reportSet>
+                   <reports>
+                     <report>checkstyle</report>
+                   </reports>
+                 </reportSet>
+               </reportSets>
+             </plugin>
+           </plugins>
+       </reporting>
 
 </project>

@@ -80,7 +80,7 @@ public class EmployeeDAO extends CassandraClusterData{
             this.employeeList.add(new Employee(row));
 
             // Pre-aggregate the playlist length in seconds;
-            this.employee_list_length_in_seconds += row.getInt("track_length_in_seconds");
+            //this.employee_list_length_in_seconds += row.getInt("track_length_in_seconds");
         }
         }
         catch(Exception ex)

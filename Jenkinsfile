@@ -7,6 +7,18 @@ pipeline {
                     checkout([$class: 'GitSCM', branches: [[name: '*/hotfix']], doGenerateSubmoduleConfigurations: false, extensions: [], submoduleCfg: [], userRemoteConfigs: [[url: 'https://github.com/pmysore1/TestCassandra.git']]])
                 }
             }
+             stages {
+                stage('Test') {
+                    steps {
+                        sh './gradlew check'
+                    }
+                }
+            }
+            post {
+                always {
+                    junit 'build/reports/**/*.xml'
+                }
+            }
             stage('Build') {
                 steps {
                     echo 'Building..'

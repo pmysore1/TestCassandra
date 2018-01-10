@@ -15,7 +15,16 @@ pipeline {
                     post {
                         always {
                             //junit 'build/reports/**/*.xml'
-                            junit '**/target/test-resports*.xml'
+                            //junit '**/target/test-resports*.xml'
+                            step([$class: 'JUnitResultArchiver', testResults: '**/reports/junit/*.xml', healthScaleFactor: 1.0])
+                            publishHTML (target: [
+                                    allowMissing: false,
+                                    alwaysLinkToLastBuild: false,
+                                    keepAll: true,
+                                    reportDir: 'coverage',
+                                    reportFiles: 'index.html',
+                                    reportName: "Junit Report"
+                            ])
                             echo 'Testing is successful'
                         }
             

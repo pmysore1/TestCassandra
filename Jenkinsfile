@@ -15,6 +15,7 @@ pipeline {
                     post {
                         always {
                             //junit 'build/reports/**/*.xml'
+                            junit '**/target/test-resports*.xml'
                             echo 'Testing is successful'
                         }
             

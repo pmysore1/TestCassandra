@@ -62,7 +62,8 @@ pipeline {
                 timeout(time:5, unit:'DAYS'){
                     input message:'Approve PRODUCTION Deployment?'
                 }
-
+                sh 'chmod +x publish_docker_image_to_AWS_ECS.sh'
+                sh './publish_docker_image_to_AWS_ECS.sh ${BUILD_NUMBER}'
                 //build job: 'Deploy-to-Prod'
             }
             post {

@@ -31,7 +31,7 @@ pipeline {
                     }
             }
             
-            stage('Build') {
+            stage('Build and Deploy to Staging') {
                 steps {
                     echo 'Building..'
                     sh '/home/jenkins/apache-maven-3.5.2/bin/mvn -Pdev clean package'
@@ -69,7 +69,7 @@ pipeline {
                     env.RELEASE_SCOPE = input message: 'User input required', ok: 'Release!',
                             parameters: [choice(name: 'RELEASE_SCOPE', choices: 'patch\nminor\nmajor', description: 'What is the release scope?')]
                 }
-                echo "${env.RELEASE_SCOPE}"
+                echo "Release scope selected: ${env.RELEASE_SCOPE}"
             }
         }
     }

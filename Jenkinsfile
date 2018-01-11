@@ -16,7 +16,7 @@ pipeline {
                         always {
                             //junit 'build/reports/**/*.xml'
                             //junit '**/target/test-resports*.xml'
-                            step([$class: 'JUnitResultArchiver', testResults: '**/target/surefire-reports/*.xml', healthScaleFactor: 1.0])
+                            //step([$class: 'JUnitResultArchiver', testResults: '**/target/surefire-reports/*.xml', healthScaleFactor: 1.0])
                             /*publishHTML (target: [
                                     allowMissing: false,
                                     alwaysLinkToLastBuild: false,

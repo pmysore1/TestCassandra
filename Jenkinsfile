@@ -17,14 +17,14 @@ pipeline {
                             //junit 'build/reports/**/*.xml'
                             //junit '**/target/test-resports*.xml'
                             step([$class: 'JUnitResultArchiver', testResults: '**/target/surefire-reports/*.xml', healthScaleFactor: 1.0])
-                            publishHTML (target: [
+                            /*publishHTML (target: [
                                     allowMissing: false,
                                     alwaysLinkToLastBuild: false,
                                     keepAll: true,
                                     reportDir: 'coverage',
                                     reportFiles: 'index.html',
                                     reportName: "Junit Report"
-                            ])
+                            ])*/
                             echo 'Testing is successful'
                         }
             

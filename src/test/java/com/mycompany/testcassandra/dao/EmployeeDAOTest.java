@@ -53,6 +53,7 @@ public class EmployeeDAOTest {
         //List<EmployeeDAO.Employee> result = instance.getEmployeesByDept(departmentName);
         //assertEquals(expResult, result);
         assertEquals("true", "true") ;
+        
         // TODO review the generated test code and remove the default call to fail.
         //fail("The test case is a prototype.");
     }

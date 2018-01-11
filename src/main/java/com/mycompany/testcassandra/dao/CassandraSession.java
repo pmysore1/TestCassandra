@@ -6,6 +6,8 @@
 package com.mycompany.testcassandra.dao;
 import com.datastax.driver.core.Cluster;
 import com.datastax.driver.core.Session;
+import com.mycompany.testcassandra.awsutils.EncryptedS3Properties;
+import com.mycompany.testcassandra.awsutils.EncryptedS3PropertiesException;
 import java.util.Properties;
 /**
  *
@@ -18,11 +20,20 @@ public class CassandraSession {
     private static String userNanme = "cassandra"; 
     private static String password  ="cassandra";
     Properties dbProperties ;
+    EncryptedS3Properties S3DBProperties ;
     CassandraSession(Properties dbProperties)
     {
         this.dbProperties = dbProperties ;
         this.cassandraDBHostName = (String)dbProperties.get("cassandraDBHostName");
         this.cassandraKeySpace   = (String)dbProperties.get("keyspaceName");
+    }
+    CassandraSession(EncryptedS3Properties S3DBProperties) throws EncryptedS3PropertiesException
+    {
+        this.S3DBProperties = S3DBProperties ;
+        this.cassandraDBHostName = (String)S3DBProperties.get("cassandraDBHostName");
+        this.cassandraKeySpace   = (String)S3DBProperties.get("keyspaceName");
+        this.userNanme           = (String)S3DBProperties.get("db-user");
+        this.userNanme           = (String)S3DBProperties.get("db-password");
     }
     public static Session getSession() {
 

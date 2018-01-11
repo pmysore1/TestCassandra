@@ -9,6 +9,8 @@ import com.datastax.driver.core.BoundStatement;
 import com.datastax.driver.core.PreparedStatement;
 import com.datastax.driver.core.ResultSet;
 import com.datastax.driver.core.Row;
+import com.mycompany.testcassandra.awsutils.EncryptedS3Properties;
+import com.mycompany.testcassandra.awsutils.EncryptedS3PropertiesException;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Properties;
@@ -23,12 +25,18 @@ public class EmployeeDAO extends CassandraClusterData{
     private int employee_list_length_in_seconds;
     private List<Employee> employeeList = new ArrayList<>();
     Properties dbProperties ;
+    //EncryptedS3Properties encryptedS3Properties ;
     
     public EmployeeDAO(Properties dbProperties)
     {
         super(dbProperties) ;
         this.dbProperties = dbProperties ;
         
+    }
+    public EmployeeDAO(EncryptedS3Properties dbProperties) throws EncryptedS3PropertiesException
+    {
+        super(dbProperties) ;
+        //this.encryptedS3Properties = dbProperties ;
     }
     public static class Employee {
         int empID;

@@ -5,6 +5,7 @@
  */
 package com.mycompany.testcassandra.view;
 
+import com.mycompany.testcassandra.awsutils.EncryptedS3Properties;
 import com.mycompany.testcassandra.dao.EmployeeDAO;
 import java.io.IOException;
 import java.io.PrintWriter;
@@ -104,11 +105,13 @@ public class TestCassandraDB extends HttpServlet {
        out.println("</br>") ;
        
        prop.load(classLoader.getResourceAsStream("app.properties")); 
-       String dbHostName = prop.getProperty("cassandraDBHostName") ;
-       String keySpace = prop.getProperty("keyspaceName") ;
-       out.println("cassandraDBHostName :: " + dbHostName) ;
+       //String dbHostName = prop.getProperty("cassandraDBHostName") ;
+       //String keySpace = prop.getProperty("keyspaceName") ;
+       String s3BucketName = prop.getProperty("aws.s3.bucket") ;
+       String s3FileName = prop.getProperty("aws.s3.filename") ;
+       out.println("s3BucketName :: " + s3BucketName) ;
        out.println("</br>") ;
-       out.println("keyspaceName :: " + keySpace) ;
+       out.println("s3FileName :: " + s3FileName) ;
        out.println("</br>") ;
        EmployeeDAO employeeDAO = new EmployeeDAO(prop) ;
        out.println("CassandraVersion :: " + employeeDAO.getCassandraVersion()) ;
@@ -128,5 +131,23 @@ public class TestCassandraDB extends HttpServlet {
         }
        
        
+    }
+    private EncryptedS3Properties getAWSS3PropertyFileForDBDetails(PrintWriter out, String bucketName, String filename, boolean localCreds ) {
+    
+        EncryptedS3Properties props = null;
+        try {
+          props = new EncryptedS3Properties(bucketName, filename, localCreds);
+        } catch (Exception e) {
+          out.println("</br>") ;
+          out.println("Error :: Unable to obtain S3 Properties") ;
+          System.out.println("Unable to obtain S3 Properties.");
+          e.printStackTrace();
+          
+        }
+    
+        props.keySet().forEach((key) -> {
+            System.out.println(key);
+        });
+        return props;
     }
 }

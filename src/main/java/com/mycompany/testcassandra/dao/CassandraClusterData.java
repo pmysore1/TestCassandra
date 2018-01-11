@@ -6,6 +6,8 @@
 package com.mycompany.testcassandra.dao;
 
 import com.datastax.driver.core.Row;
+import com.mycompany.testcassandra.awsutils.EncryptedS3Properties;
+import com.mycompany.testcassandra.awsutils.EncryptedS3PropertiesException;
 import java.util.Properties;
 
 /**
@@ -16,7 +18,7 @@ public class CassandraClusterData extends CassandraSession{
     private final String clusterName;
     private final String cassandraVersion;
     private Properties dbProperties ;
-
+ 
   /**
    * Constructor to query cassandra for the release_version and cluster_name
    */
@@ -29,7 +31,14 @@ public class CassandraClusterData extends CassandraSession{
     clusterName = row.getString("cluster_name");
 
   }
+  public CassandraClusterData(EncryptedS3Properties dbProperties) throws EncryptedS3PropertiesException {
 
+    super(dbProperties) ;
+    Row row = getSession().execute("select cluster_name, release_version from system.local").one();
+    cassandraVersion = row.getString("release_version");
+    clusterName = row.getString("cluster_name");
+
+  }
   public String getClusterName() {
     return clusterName;
   }

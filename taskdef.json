@@ -1,0 +1,18 @@
+{
+  "family": "new-launch-container-taskdef",
+  "containerDefinitions": [
+    {
+      "image": "%REPOSITORY_URI%:v_%BUILD_NUMBER%",
+      "name": "new-cassandra-webapp-ecs-test",
+      "memory": 128,
+      "essential": true,
+      "portMappings": [
+        {
+          "hostPort": 8080,
+          "protocol": "tcp",
+          "containerPort": 8080
+        }
+      ]
+    }
+  ]
+}
